@@ -296,20 +296,43 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
     const subject = document.getElementById('subject').value;
     const message = document.getElementById('message').value;
     
+    const submitBtn = document.querySelector('.submit-btn');
+    const originalText = submitBtn.innerHTML;
+    
+    // Show loading state
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+    submitBtn.disabled = true;
+    submitBtn.style.background = 'linear-gradient(135deg, #666, #888)';
+    submitBtn.style.transition = 'all 0.5s ease';
+    
     // Create mailto link
     const mailtoLink = `mailto:dinukamadhushan1234@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\n\nMessage:\n' + message)}`;
     
-    window.location.href = mailtoLink;
-    
-    // Show success message
-    const submitBtn = document.querySelector('.submit-btn');
-    const originalText = submitBtn.innerHTML;
-    submitBtn.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
-    submitBtn.style.background = 'linear-gradient(135deg, #00ff88, #00cc6a)';
-    
     setTimeout(() => {
-        submitBtn.innerHTML = originalText;
-        submitBtn.style.background = 'linear-gradient(135deg, var(--primary-color), var(--secondary-color))';
-        document.getElementById('contactForm').reset();
-    }, 3000);
+        window.location.href = mailtoLink;
+        
+        // Show success message
+        submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Email Client Opened!';
+        submitBtn.style.background = 'linear-gradient(135deg, #00ff88, #00cc6a)';
+        submitBtn.style.transform = 'scale(1.05)';
+        
+        setTimeout(() => {
+            submitBtn.style.transform = 'scale(1)';
+        }, 200);
+        
+        setTimeout(() => {
+            submitBtn.innerHTML = originalText;
+            submitBtn.style.background = 'linear-gradient(135deg, var(--primary-color), var(--secondary-color))';
+            submitBtn.disabled = false;
+            document.getElementById('contactForm').reset();
+        }, 5000);
+    }, 500);
+});
+
+// Make email text clickable
+document.querySelectorAll('.contact-details p').forEach(element => {
+    const text = element.textContent;
+    if (text.includes('@')) {
+        element.innerHTML = `<a href="mailto:${text}" style="color: inherit; text-decoration: none;">${text}</a>`;
+    }
 });

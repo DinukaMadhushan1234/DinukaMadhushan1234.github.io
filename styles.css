@@ -1221,6 +1221,22 @@ section {
     color: #000;
 }
 
+.contact-icon-link {
+    text-decoration: none;
+    flex-shrink: 0;
+}
+
+.contact-details p a {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.contact-details p a:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
 .contact-details h4 {
     color: var(--primary-color);
     margin-bottom: 0.5rem;
