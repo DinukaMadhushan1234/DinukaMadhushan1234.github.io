@@ -47,36 +47,6 @@ window.addEventListener('scroll', () => {
     });
 });
 
-// Animate circular progress and expertise bars on scroll
-const animateSkills = () => {
-    // Animate circular progress
-    const circularProgress = document.querySelectorAll('.circular-progress');
-    circularProgress.forEach(circle => {
-        circle.classList.add('animate');
-    });
-    
-    // Animate expertise bars
-    const expertiseItems = document.querySelectorAll('.expertise-item');
-    expertiseItems.forEach(item => {
-        item.classList.add('animate');
-    });
-};
-
-let skillsAnimated = false;
-window.addEventListener('scroll', () => {
-    if (!skillsAnimated) {
-        const skillsSection = document.querySelector('.skills');
-        if (skillsSection) {
-            const skillsPosition = skillsSection.getBoundingClientRect().top;
-            const screenPosition = window.innerHeight;
-            
-            if (skillsPosition < screenPosition - 100) {
-                animateSkills();
-                skillsAnimated = true;
-            }
-        }
-    }
-});
 // Intersection Observer for fade-in animations
 const observerOptions = {
     threshold: 0.1,
